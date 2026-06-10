@@ -77,4 +77,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0967cba290e24d2e813af992a4a74f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.Alpha.AlphaMovement
-  Speed: 3
+  _Speed: 3

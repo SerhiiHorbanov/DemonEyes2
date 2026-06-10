@@ -5,11 +5,11 @@ namespace Characters.Alpha
 {
 	public class AlphaMovement : PlayerMovement
 	{
-		[SerializeField] float Speed;
+		[SerializeField] private float _Speed;
 		
 		private void FixedUpdate()
 		{
-			transform.position += (Vector3)(MoveDirection * Time.fixedDeltaTime);
+			transform.position += (Vector3)(MoveDirection * (_Speed * Time.fixedDeltaTime));
 		}
 	}
 }
