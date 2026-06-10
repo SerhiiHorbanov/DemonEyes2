@@ -139,6 +139,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.Boids.Boid
   _Velocity: {x: 1, y: 0}
+  _MaxSignedDistanceToArena: -0.5
+  _ArenaPullForce: 10
+  _Arena: {fileID: 0}
   _TargetingWeight: 5
   _Target: {fileID: 0}
   _BoidForcesRadius: 2.5

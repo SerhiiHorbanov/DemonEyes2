@@ -10,6 +10,10 @@ namespace Characters.Boids
 		
 		[SerializeField] private Vector2 _Velocity;
 
+		[SerializeField] private float _MaxSignedDistanceToArena;
+		[SerializeField] private float _ArenaPullForce;
+		[SerializeField] private ArenaArea _Arena;
+		
 		[SerializeField] private float _TargetingWeight;
 		[SerializeField] private Transform _Target;
 		
@@ -36,11 +40,17 @@ namespace Characters.Boids
 
 		private void FixedUpdate()
 		{
-			transform.position += (Vector3)(_Velocity * Time.fixedDeltaTime);
+			float deltaTime = Time.fixedDeltaTime;
 			
-			ApplyTargeting(Time.fixedDeltaTime);
-			ApplyBoidInteractions(Time.fixedDeltaTime);
-			UpdateSpeed(Time.fixedDeltaTime);
+			ApplyTargeting(deltaTime);
+			ApplyBoidInteractions(deltaTime);
+			
+			if (ShouldApplyArenaPullForce(out Vector2 relativeArenaPosition))
+				ApplyArenaPullForce(deltaTime, relativeArenaPosition);
+			
+			UpdateSpeed(deltaTime);
+			
+			transform.position += (Vector3)(_Velocity * deltaTime);
 			UpdateRotation();
 		}
 
@@ -119,6 +129,20 @@ namespace Characters.Boids
 				
 				_Velocity = _Velocity.normalized * speed;
 			}
+		}
+		
+		private bool ShouldApplyArenaPullForce(out Vector2 relativeArenaPosition)
+		{
+			float distance = _Arena.GetSignedDistanceTo(transform.position, out relativeArenaPosition);
+
+			return distance > _MaxSignedDistanceToArena;
+		}
+		
+		private void ApplyArenaPullForce(float deltaTime, Vector2 relativeArenaPosition)
+		{
+			Vector2 direction = relativeArenaPosition.normalized;
+			Vector2 force = direction * _ArenaPullForce;
+			_Velocity += force * deltaTime;
 		}
 	}
 }
