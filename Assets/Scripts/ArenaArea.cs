@@ -21,7 +21,7 @@ public class ArenaArea : MonoBehaviour
 	public Vector2 GetRandomPositionInside()
 		=> MapFromUnitCircleToWorld(Random.insideUnitCircle);
 	
-	private Vector2 MapFromUnitCircleToWorld(Vector2 input)
+	public Vector2 MapFromUnitCircleToWorld(Vector2 input)
 		=> input * _Radius + (Vector2)transform.position;
 
 	private void OnDrawGizmosSelected()
