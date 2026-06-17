@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
@@ -27,6 +28,8 @@ namespace Characters.Boids
 		[SerializeField] private float _SpeedAdjustmentForce;
 		
 		private float ForcesRadiusSquared => _BoidForcesRadius * _BoidForcesRadius;
+		public float DistanceToTarget { get; private set; }
+		public float Speed { get; private set; }
 
 		private void Awake()
 		{
@@ -59,7 +62,9 @@ namespace Characters.Boids
 			Vector2 target = _Target.position;
 			Vector2 position = transform.position;
 			
-			Vector2 directionToTarget = (target - position).normalized;
+			Vector2 relativePosition = target - position;
+			DistanceToTarget = relativePosition.magnitude;
+			Vector2 directionToTarget = relativePosition / DistanceToTarget;
 			_Velocity += directionToTarget * (_TargetingWeight * fixedDeltaTime);
 		}
 
@@ -112,23 +117,21 @@ namespace Characters.Boids
 
 		private void UpdateSpeed(float deltaTime)
 		{
-			if (_Velocity.sqrMagnitude > _MaxSpeed * _MaxSpeed)
+			Speed = _Velocity.magnitude;
+			if (Speed < _MaxSpeed)
+				return;
+				
+			if (Speed > _MaxSpeed)
+				Speed = _MaxSpeed;
+
+			if (Mathf.Abs(Speed - _TargetSpeed) < _SpeedAdjustmentForce * deltaTime)
 			{
-				float speed = _Velocity.magnitude;
-				
-				if (speed > _MaxSpeed)
-					speed = _MaxSpeed;
-
-				if (Mathf.Abs(speed - _TargetSpeed) > _SpeedAdjustmentForce * deltaTime)
-				{
-					_Velocity = _Velocity.normalized * _TargetSpeed;
-					return;
-				}
-
-				speed += _SpeedAdjustmentForce * Mathf.Sign(_TargetSpeed - speed) * deltaTime;
-				
-				_Velocity = _Velocity.normalized * speed;
+				_Velocity = _Velocity.normalized * _TargetSpeed;
+				return;
 			}
+
+			Speed += _SpeedAdjustmentForce * Mathf.Sign(_TargetSpeed - Speed) * deltaTime;
+			_Velocity = _Velocity.normalized * Speed;
 		}
 		
 		private bool ShouldApplyArenaPullForce(out Vector2 relativeArenaPosition)
