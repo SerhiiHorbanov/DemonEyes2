@@ -20,5 +20,25 @@ namespace Characters.Player
         {
             _movement.SetMoveDirection(value);
         }
+
+        public void ActivatePrimaryAbility()
+        {
+            _PrimaryAbility?.Activate();
+        }
+        
+        public void DeactivatePrimaryAbility()
+        {
+            _PrimaryAbility?.Deactivate();
+        }
+
+        public void ActivateSecondaryAbility()
+        {
+            _SecondaryAbility?.Activate();
+        }
+
+        public void DeactivateSecondaryAbility()
+        {
+            _SecondaryAbility?.Deactivate();
+        }
     }
 }
