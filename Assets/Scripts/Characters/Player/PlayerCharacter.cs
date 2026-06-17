@@ -16,11 +16,6 @@ namespace Characters.Player
             _damageTakingBehaviour = GetComponent<IDamageable>();
         }
 
-        public void UsePrimaryAbility()
-        {
-            _PrimaryAbility.Activate();
-        }
-
         public void SetMoveDirection(Vector2 value)
         {
             _movement.SetMoveDirection(value);
