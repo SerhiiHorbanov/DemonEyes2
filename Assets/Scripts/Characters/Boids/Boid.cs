@@ -144,5 +144,11 @@ namespace Characters.Boids
 			Vector2 force = direction * _ArenaPullForce;
 			_Velocity += force * deltaTime;
 		}
+
+		private void OnDrawGizmosSelected()
+		{
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireSphere(transform.position, _BoidForcesRadius);
+		}
 	}
 }
