@@ -45,7 +45,8 @@ namespace Characters.Boids
 		{
 			float deltaTime = Time.fixedDeltaTime;
 			
-			ApplyTargeting(deltaTime);
+			if (_Target != null)
+				ApplyTargeting(deltaTime);
 			ApplyBoidInteractions(deltaTime);
 			
 			if (ShouldApplyArenaPullForce(out Vector2 relativeArenaPosition))
