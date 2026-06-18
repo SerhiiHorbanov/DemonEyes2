@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,15 +5,10 @@ namespace Characters
 {
 	public class DamageInflicter : MonoBehaviour
 	{
-		public UnityEvent<Health> _OnInflictedDamage;
+		public UnityEvent<IDamageable> _OnInflictedDamage;
 		
 		public GameObject[] _Ignored;
 		[SerializeField] private int _Damage;
-
-		/*private void OnCollisionEnter2D(Collision other)
-		{
-			Debug.Log("Collision");
-		}*/
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
@@ -28,6 +22,7 @@ namespace Characters
 
 			IDamageable damageable = otherGO.GetComponent<IDamageable>();
 			damageable?.TakeDamage(_Damage);
+			_OnInflictedDamage?.Invoke(damageable);
 		}
 	}
 }

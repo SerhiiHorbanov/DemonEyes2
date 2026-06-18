@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5608804784626460549}
   - component: {fileID: 510829259089868037}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,8 @@ GameObject:
   - component: {fileID: 4423831962216892668}
   - component: {fileID: 65923945129757237}
   - component: {fileID: 302015848575744119}
-  m_Layer: 0
+  - component: {fileID: 2488477756513200686}
+  m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,6 +205,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _GodMode: 0
   _Hp: 1
 --- !u!50 &302015848575744119
 Rigidbody2D:
@@ -232,3 +234,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!81 &2488477756513200686
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6011140040128277087}
+  m_Enabled: 1

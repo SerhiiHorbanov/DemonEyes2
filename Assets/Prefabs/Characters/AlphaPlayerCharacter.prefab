@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AlphaPlayerCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 7130454443118826330, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
+      propertyPath: _PrimaryAbility
+      value: 
+      objectReference: {fileID: 2378619620295823923}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -67,6 +71,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6011140040128277087, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2504677813088464472}
+    - targetCorrespondingSourceObject: {fileID: 6011140040128277087, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2378619620295823923}
   m_SourcePrefab: {fileID: 100100000, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
 --- !u!1 &7446820230041457027 stripped
 GameObject:
@@ -86,3 +93,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.Alpha.AlphaMovement
   _Speed: 3
+--- !u!114 &2378619620295823923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446820230041457027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 765d72444549455ebf6d125493896b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Characters.Player.AlphaShootingAbility
+  _IsAutomatic: 1
+  _CanBeBuffered: 0
+  _Cooldown: 0.5
+  _ProjectilePrefab: {fileID: 58873432790524859, guid: 914e37cf28a67f94994d7b3083ee8735, type: 3}
