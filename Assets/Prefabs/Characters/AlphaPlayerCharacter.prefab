@@ -107,5 +107,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Characters.Player.AlphaShootingAbility
   _IsAutomatic: 1
   _CanBeBuffered: 0
-  _Cooldown: 0.5
+  _Cooldown: 0.2
   _ProjectilePrefab: {fileID: 58873432790524859, guid: 914e37cf28a67f94994d7b3083ee8735, type: 3}
+  _ProjectileSpeed: 0

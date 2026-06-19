@@ -3,11 +3,14 @@ using UnityEngine.InputSystem;
 
 namespace Characters.Player
 {
+	[RequireComponent(typeof(PlayerInput))]
 	public class PlayerCharacterController : MonoBehaviour
 	{
 		private PlayerInput _input;
 		
-		[SerializeField] private PlayerCharacter _Character; 
+		[SerializeField] private Camera _Camera;
+		[SerializeField] private PlayerCharacter _Character;
+		[SerializeField] private PlayerAim _Aim;
 		
 		private void Awake()
 		{
@@ -18,6 +21,15 @@ namespace Characters.Player
 			_input.actions["Primary Ability"].canceled += PrimaryAbilityCanceled;
 			_input.actions["Secondary Ability"].performed += SecondaryAbilityPerformed;
 			_input.actions["Secondary Ability"].canceled += SecondaryAbilityCanceled;
+			_input.actions["Pointer Aim"].performed += PointerAimPerformed;
+		}
+
+		private void PointerAimPerformed(InputAction.CallbackContext obj)
+		{
+			Vector2 relativeAimPoint = obj.ReadValue<Vector2>();
+			Vector2 worldPositionOfPointer = _Camera.ScreenToWorldPoint(relativeAimPoint);
+			Vector2 pointerRelativeToCamera = worldPositionOfPointer - (Vector2)_Camera.transform.position;
+			_Aim.SetRelativeAimPoint(pointerRelativeToCamera);
 		}
 
 		private void SecondaryAbilityCanceled(InputAction.CallbackContext obj)
