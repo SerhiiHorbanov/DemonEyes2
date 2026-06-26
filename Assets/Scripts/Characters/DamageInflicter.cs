@@ -6,6 +6,7 @@ namespace Characters
 	public class DamageInflicter : MonoBehaviour
 	{
 		public UnityEvent<IDamageable> _OnInflictedDamage;
+		public UnityEvent _OnCollidedWithoutInflictingDamage;
 		
 		public GameObject[] _Ignored;
 		[SerializeField] private int _Damage;
@@ -21,8 +22,14 @@ namespace Characters
 			}
 
 			IDamageable damageable = otherGO.GetComponent<IDamageable>();
-			damageable?.TakeDamage(_Damage);
-			_OnInflictedDamage?.Invoke(damageable);
+			if (damageable is null)
+			{
+				_OnCollidedWithoutInflictingDamage.Invoke();
+				return;
+			}
+			
+			damageable.TakeDamage(_Damage);
+			_OnInflictedDamage.Invoke(damageable);
 		}
 	}
 }

@@ -8,14 +8,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 302015848575744119, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 302015848575744119, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
-      propertyPath: m_AngularDamping
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5006236742050782367, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -64,6 +56,10 @@ PrefabInstance:
       propertyPath: _PrimaryAbility
       value: 
       objectReference: {fileID: 2378619620295823923}
+    - target: {fileID: 7130454443118826330, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
+      propertyPath: _SecondaryAbility
+      value: 
+      objectReference: {fileID: 4662597490726652893}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -74,7 +70,34 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6011140040128277087, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2378619620295823923}
+    - targetCorrespondingSourceObject: {fileID: 6011140040128277087, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7646677738804711920}
+    - targetCorrespondingSourceObject: {fileID: 6011140040128277087, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4662597490726652893}
+    - targetCorrespondingSourceObject: {fileID: 4603628170529486091, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 552284686928430451}
   m_SourcePrefab: {fileID: 100100000, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
+--- !u!1 &851436386418249431 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4603628170529486091, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
+  m_PrefabInstance: {fileID: 3761551942739393500}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &552284686928430451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 851436386418249431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45ee4ac252a41b7b45a2bc392930549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Characters.Player.PlayerBodyRotator
+  _Aim: {fileID: 8583029466997269558}
 --- !u!1 &7446820230041457027 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6011140040128277087, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
@@ -108,5 +131,44 @@ MonoBehaviour:
   _IsAutomatic: 1
   _CanBeBuffered: 0
   _Cooldown: 0.2
-  _ProjectilePrefab: {fileID: 58873432790524859, guid: 914e37cf28a67f94994d7b3083ee8735, type: 3}
-  _ProjectileSpeed: 0
+--- !u!114 &7646677738804711920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446820230041457027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd03f362a9e4ed5ae225ebf6b6f3134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Characters.Player.PlayerProjectileFactory
+  _ProjectilePrefab: {fileID: 0}
+--- !u!114 &4662597490726652893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446820230041457027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 753f195bb29b4d019f498212d863433e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Characters.Beta.BetaShootingAbility
+  _IsAutomatic: 0
+  _CanBeBuffered: 1
+  _Cooldown: 0.5
+  _HalfSpread: 15
+  _ProjectileCount: 10
+--- !u!114 &8583029466997269558 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4841013755917393898, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
+  m_PrefabInstance: {fileID: 3761551942739393500}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7446820230041457027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca939a130a024f7f939f0e4487712336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Characters.Player.PlayerAim

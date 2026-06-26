@@ -2,23 +2,23 @@ using UnityEngine;
 
 namespace Characters.Player
 {
+	[RequireComponent(typeof(PlayerProjectileFactory))]
 	[RequireComponent(typeof(PlayerAim))]
 	public class AlphaShootingAbility : AbilityWithCooldown
 	{
-		[SerializeField] private GameObject _ProjectilePrefab;
-		
+		private PlayerProjectileFactory _projectileFactory;
 		private PlayerAim _aim;
 
 		private void Awake()
 		{
+			_projectileFactory = GetComponent<PlayerProjectileFactory>();
 			_aim = GetComponent<PlayerAim>();
 		}
 		
 		protected override void ActivateAfterCooldown()
 		{
 			float projectileZRotation = _aim.GetRotationDegTowardsTarget();
-			Quaternion rotation = Quaternion.Euler(0, 0, projectileZRotation);
-			GameObject projectile = Instantiate(_ProjectilePrefab, transform.position, rotation);
+			_projectileFactory.SpawnProjectile(projectileZRotation);
 		}
 	}
 }
