@@ -893,10 +893,6 @@ PrefabInstance:
       propertyPath: _PrimaryAbility
       value: 
       objectReference: {fileID: 2378619620295823923}
-    - target: {fileID: 7130454443118826330, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
-      propertyPath: _SecondaryAbility
-      value: 
-      objectReference: {fileID: 4662597490726652893}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -913,9 +909,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6011140040128277087, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7646677738804711920}
-    - targetCorrespondingSourceObject: {fileID: 6011140040128277087, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4662597490726652893}
     - targetCorrespondingSourceObject: {fileID: 4603628170529486091, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
       insertIndex: -1
       addedObject: {fileID: 552284686928430451}
@@ -985,23 +978,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.Player.PlayerProjectileFactory
   _ProjectilePrefab: {fileID: 58873432790524859, guid: 914e37cf28a67f94994d7b3083ee8735, type: 3}
---- !u!114 &4662597490726652893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7446820230041457027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 753f195bb29b4d019f498212d863433e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Characters.Beta.BetaShootingAbility
-  _IsAutomatic: 0
-  _CanBeBuffered: 1
-  _Cooldown: 0.5
-  _HalfSpread: 15
-  _ProjectileCount: 10
 --- !u!4 &8163352964486620995 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5006236742050782367, guid: 4feba2899e51b234fac0633b3a33a9ce, type: 3}
