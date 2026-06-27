@@ -1,4 +1,6 @@
+using Tools;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Characters.Player
 {
@@ -8,6 +10,9 @@ namespace Characters.Player
 	{
 		private PlayerProjectileFactory _projectileFactory;
 		private PlayerAim _aim;
+
+		[SerializeField] private IAudioGenerator _ShotAudioGenerator;
+		[SerializeField] private AudioSourcePool _ShotAudio;
 
 		private void Awake()
 		{
@@ -19,6 +24,9 @@ namespace Characters.Player
 		{
 			float projectileZRotation = _aim.GetRotationDegTowardsTarget();
 			_projectileFactory.SpawnProjectile(projectileZRotation);
+
+			
+			_ShotAudio.PlayEmptySource();
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using Characters.Player;
+using Tools;
 using UnityEngine;
 
 namespace Characters.Beta
@@ -10,6 +11,7 @@ namespace Characters.Beta
 
 		[SerializeField] private float _HalfSpread;
 		[SerializeField] private int _ProjectileCount;
+		[SerializeField] private AudioSourcePool _ShotAudio;
 		
 		private void Awake()
 		{
@@ -25,6 +27,7 @@ namespace Characters.Beta
 				float projectileZRotation = lookingRotationDeg + Random.Range(-_HalfSpread, _HalfSpread);
 				_projectileFactory.SpawnProjectile(projectileZRotation);
 			}
+			_ShotAudio.PlayEmptySource();
 		}
 	}
 }
