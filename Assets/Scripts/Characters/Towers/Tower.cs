@@ -23,8 +23,8 @@ namespace Characters.Towers
 		
 		public void SpawnBoid()
 		{
-			Instantiate(_BoidPrefab, transform.position, Quaternion.identity);
-			Boid boid = _BoidPrefab.GetComponent<Boid>();
+			GameObject boidGO = Instantiate(_BoidPrefab, transform.position, Quaternion.identity);
+			Boid boid = boidGO.GetComponent<Boid>();
 			boid._Target = _Target;
 			boid._Arena = _Arena;
 		}
