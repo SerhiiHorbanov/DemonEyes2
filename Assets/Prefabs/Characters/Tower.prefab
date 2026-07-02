@@ -434,6 +434,7 @@ GameObject:
   - component: {fileID: 3874086491562636741}
   - component: {fileID: 370425351508753730}
   - component: {fileID: 8140666195699625245}
+  - component: {fileID: 6629904587769685934}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -500,9 +501,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.Towers.Tower
   _Speed: 0
-  _Arena: {fileID: 0}
-  _BoidPrefab: {fileID: 7764878301358554854, guid: 30b76e5a6fe781845a3917f9ec6ffcac, type: 3}
-  _Target: {fileID: 0}
 --- !u!114 &370425351508753730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,6 +539,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6629904587769685934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357342315014693696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55213632f36548d3925b34569b75f28f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Characters.Boids.BoidFactory
+  _BoidPrefab: {fileID: 7764878301358554854, guid: 30b76e5a6fe781845a3917f9ec6ffcac, type: 3}
+  _Target: {fileID: 0}
+  _Arena: {fileID: 0}
 --- !u!1 &6762629598162666452
 GameObject:
   m_ObjectHideFlags: 0

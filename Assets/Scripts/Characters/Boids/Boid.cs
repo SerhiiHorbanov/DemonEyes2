@@ -13,10 +13,10 @@ namespace Characters.Boids
 
 		[SerializeField] private float _MaxSignedDistanceToArena;
 		[SerializeField] private float _ArenaPullForce;
-		[SerializeField] public ArenaArea _Arena;
+		[SerializeField] private ArenaArea _Arena;
 		
 		[SerializeField] private float _TargetingWeight;
-		[SerializeField] public Transform _Target;
+		[SerializeField] private Transform _Target;
 		
 		[SerializeField] private float _BoidForcesRadius;
 		[SerializeField] private float _CohesionWeight;
@@ -36,6 +36,12 @@ namespace Characters.Boids
 			Boids.Add(this);
 		}
 
+		public void Initialize(Transform target, ArenaArea arena)
+		{
+			_Target = target;
+			_Arena = arena;
+		}
+		
 		private void OnDestroy()
 		{
 			Boids.RemoveSwapBack(this);

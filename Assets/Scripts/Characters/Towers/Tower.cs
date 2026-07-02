@@ -4,29 +4,24 @@ using UnityEngine;
 namespace Characters.Towers
 {
 	[RequireComponent(typeof(Rigidbody2D))]
+	[RequireComponent(typeof(BoidFactory))]
 	public class Tower : MonoBehaviour
 	{
 		private Vector2 _targetPosition;
 		public float _Speed;
 		
-		[SerializeField] private ArenaArea _Arena;
-		
-		[SerializeField] private GameObject _BoidPrefab;
-		[SerializeField] private Transform _Target;
-		
 		private Rigidbody2D _rigidBody;
+		private BoidFactory _boidFactory;
 
 		private void Awake()
 		{
 			_rigidBody = GetComponent<Rigidbody2D>();
+			_boidFactory = GetComponent<BoidFactory>();
 		}
 		
 		public void SpawnBoid()
 		{
-			GameObject boidGO = Instantiate(_BoidPrefab, transform.position, Quaternion.identity);
-			Boid boid = boidGO.GetComponent<Boid>();
-			boid._Target = _Target;
-			boid._Arena = _Arena;
+			_boidFactory.InstantiateAndInitializeBoid();
 		}
 
 		private void FixedUpdate()
