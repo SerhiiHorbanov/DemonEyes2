@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c24be31481428887be48ad277bf764, type: 3}
+  m_Name: Testing Timeline
+  m_EditorClassIdentifier: Assembly-CSharp::LevelTimeline
+  _Events:
+  - _TimeSeconds: 2
+    _Event: {fileID: 11400000, guid: c8ab4c766e2204f4c84121355324115e, type: 2}
+  - _TimeSeconds: 5
+    _Event: {fileID: 11400000, guid: c8ab4c766e2204f4c84121355324115e, type: 2}
+  - _TimeSeconds: 7
+    _Event: {fileID: 11400000, guid: c8ab4c766e2204f4c84121355324115e, type: 2}
+  - _TimeSeconds: 10
+    _Event: {fileID: 11400000, guid: 680d361ff4b56ea4b932c6e33c07a9d3, type: 2}
+  - _TimeSeconds: 12
+    _Event: {fileID: 11400000, guid: c8ab4c766e2204f4c84121355324115e, type: 2}
+  - _TimeSeconds: 19
+    _Event: {fileID: 11400000, guid: c8ab4c766e2204f4c84121355324115e, type: 2}
+  - _TimeSeconds: 40
+    _Event: {fileID: 11400000, guid: c8ab4c766e2204f4c84121355324115e, type: 2}
