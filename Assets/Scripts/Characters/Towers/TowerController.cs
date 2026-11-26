@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Towers
 {
@@ -12,11 +13,11 @@ namespace Characters.Towers
 		private float _currentReachedAngleDeg;
 		
 		private const int MinSidesAmount = 4;
-		[SerializeField] private int _MaxSidesAmountExclusive;
-		[SerializeField] private float _NgonRadius;
-		[SerializeField] private float _TimePerSide;
+		[FormerlySerializedAs("_MaxSidesAmountExclusive")] [SerializeField] private int _maxSidesAmountExclusive;
+		[FormerlySerializedAs("_NgonRadius")] [SerializeField] private float _ngonRadius;
+		[FormerlySerializedAs("_TimePerSide")] [SerializeField] private float _timePerSide;
 		
-		[SerializeField] private ArenaArea _Arena;
+		[FormerlySerializedAs("_Arena")] [SerializeField] private ArenaArea _arena;
 		private Tower _tower;
 
 		private void Awake()
@@ -26,23 +27,23 @@ namespace Characters.Towers
 		
 		private void Start()
 		{
-			if (_MaxSidesAmountExclusive <= MinSidesAmount)
+			if (_maxSidesAmountExclusive <= MinSidesAmount)
 			{
 				_sidesAmount = MinSidesAmount;
 				Debug.LogWarning("Max sides amount is less than min sides amount. Setting max sides amount to min sides amount.");
 			}
 			else
 			{
-				_sidesAmount = Random.Range(MinSidesAmount, _MaxSidesAmountExclusive);
+				_sidesAmount = Random.Range(MinSidesAmount, _maxSidesAmountExclusive);
 			}
 			
 			_ngonInnerAngleDeg = 360f / _sidesAmount;
 			_currentReachedAngleDeg = _ngonInnerAngleDeg * -0.5f;
-			float sideLength = _NgonRadius * Mathf.Tan(_ngonInnerAngleDeg * Mathf.Deg2Rad * 0.5f) * 2;
-			_tower._Speed = sideLength / _TimePerSide;
+			float sideLength = _ngonRadius * Mathf.Tan(_ngonInnerAngleDeg * Mathf.Deg2Rad * 0.5f) * 2;
+			_tower.Speed = sideLength / _timePerSide;
 
 			float targetAngleRad = (_currentReachedAngleDeg + _ngonInnerAngleDeg) * Mathf.Deg2Rad;
-			_targetPosition = _Arena.MapFromUnitCircleToWorld(new(Mathf.Cos(targetAngleRad), Mathf.Sin(targetAngleRad)));
+			_targetPosition = _arena.MapFromUnitCircleToWorld(new(Mathf.Cos(targetAngleRad), Mathf.Sin(targetAngleRad)));
 			_tower.MoveTowards(_targetPosition);
 		}
 
@@ -63,7 +64,7 @@ namespace Characters.Towers
 
 			_currentReachedAngleDeg += _ngonInnerAngleDeg;
 			float targetAngleRad = (_currentReachedAngleDeg + _ngonInnerAngleDeg) * Mathf.Deg2Rad;
-			_targetPosition = new Vector2(Mathf.Cos(targetAngleRad), Mathf.Sin(targetAngleRad)) * _NgonRadius;
+			_targetPosition = new Vector2(Mathf.Cos(targetAngleRad), Mathf.Sin(targetAngleRad)) * _ngonRadius;
 			_tower.MoveTowards(_targetPosition);
 			_tower.SpawnBoid();
 		}

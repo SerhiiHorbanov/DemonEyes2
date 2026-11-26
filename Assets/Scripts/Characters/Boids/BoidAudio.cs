@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Boids
 {
@@ -9,11 +10,11 @@ namespace Characters.Boids
 		private AudioSource _audioSource;
 		private Boid _boid;
 		
-		[SerializeField] private float _ReservedDistanceForAdjustments;
-		[SerializeField] private float _MinSpeedForMaxPitch;
-		[SerializeField] private float _MaxPitch;
-		[SerializeField] private float _MinSpeedForMaxVolume;
-		[SerializeField] private float _MaxVolume;
+		[FormerlySerializedAs("_ReservedDistanceForAdjustments")] [SerializeField] private float _reservedDistanceForAdjustments;
+		[FormerlySerializedAs("_MinSpeedForMaxPitch")] [SerializeField] private float _minSpeedForMaxPitch;
+		[FormerlySerializedAs("_MaxPitch")] [SerializeField] private float _maxPitch;
+		[FormerlySerializedAs("_MinSpeedForMaxVolume")] [SerializeField] private float _minSpeedForMaxVolume;
+		[FormerlySerializedAs("_MaxVolume")] [SerializeField] private float _maxVolume;
 	
 		private void Awake()
 		{
@@ -28,13 +29,13 @@ namespace Characters.Boids
 			float distanceToTarget = _boid.DistanceToTarget;
 			float cutoffDistance = _audioSource.maxDistance;
 
-			if (distanceToTarget > cutoffDistance + _ReservedDistanceForAdjustments)
+			if (distanceToTarget > cutoffDistance + _reservedDistanceForAdjustments)
 				return;
 
-			float pitch01 = Mathf.Clamp01(_boid.Speed / _MinSpeedForMaxPitch);
-			_audioSource.pitch = pitch01 * _MaxPitch;
-			float volume01 = Mathf.Clamp01(_boid.Speed / _MinSpeedForMaxVolume);
-			_audioSource.volume = volume01 * _MaxVolume;
+			float pitch01 = Mathf.Clamp01(_boid.Speed / _minSpeedForMaxPitch);
+			_audioSource.pitch = pitch01 * _maxPitch;
+			float volume01 = Mathf.Clamp01(_boid.Speed / _minSpeedForMaxVolume);
+			_audioSource.volume = volume01 * _maxVolume;
 		}
 	}
 }

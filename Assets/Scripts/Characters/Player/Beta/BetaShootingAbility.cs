@@ -1,6 +1,7 @@
 using Characters.Player;
 using Tools;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Beta
 {
@@ -9,9 +10,9 @@ namespace Characters.Beta
 		private PlayerProjectileFactory _projectileFactory;
 		private PlayerAim _aim;
 
-		[SerializeField] private float _HalfSpread;
-		[SerializeField] private int _ProjectileCount;
-		[SerializeField] private AudioSourcePool _ShotAudio;
+		[FormerlySerializedAs("_HalfSpread")] [SerializeField] private float _halfSpread;
+		[FormerlySerializedAs("_ProjectileCount")] [SerializeField] private int _projectileCount;
+		[FormerlySerializedAs("_ShotAudio")] [SerializeField] private AudioSourcePool _shotAudio;
 		
 		private void Awake()
 		{
@@ -22,12 +23,12 @@ namespace Characters.Beta
 		protected override void ActivateAfterCooldown()
 		{
 			float lookingRotationDeg = _aim.GetRotationDegTowardsTarget();
-			for (int i = 0; i < _ProjectileCount; i++)
+			for (int i = 0; i < _projectileCount; i++)
 			{
-				float projectileZRotation = lookingRotationDeg + Random.Range(-_HalfSpread, _HalfSpread);
+				float projectileZRotation = lookingRotationDeg + Random.Range(-_halfSpread, _halfSpread);
 				_projectileFactory.SpawnProjectile(projectileZRotation);
 			}
-			_ShotAudio.PlayEmptySource();
+			_shotAudio.PlayEmptySource();
 		}
 	}
 }

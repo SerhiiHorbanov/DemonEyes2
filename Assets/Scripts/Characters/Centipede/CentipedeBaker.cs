@@ -1,16 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Centipede
 {
 	public class CentipedeBaker : MonoBehaviour
 	{
-		[SerializeField] private CentipedeBakingInfo _BakingInfo;
+		[FormerlySerializedAs("_BakingInfo")] [SerializeField] private CentipedeBakingInfo _bakingInfo;
 
 		public void BakeSegments()
 		{
 			Debug.Log("Baking segments");
-			List<GameObject> segmentBakingInfos = _BakingInfo._SegmentPrefabs;
+			List<GameObject> segmentBakingInfos = _bakingInfo.SegmentPrefabs;
 			
 			CentipedeHead head = GetComponentInChildren<CentipedeHead>();
 			
@@ -23,13 +24,13 @@ namespace Characters.Centipede
 			head.ClearAndDestroySegments();
 			head.ReserveSegmentsMemory(segmentBakingInfos.Count);
 			
-			float totalLength = head._Length * 0.5f;
+			float totalLength = head.Length * 0.5f;
 			Vector3 initialPosition = head.transform.position;
 			
 			foreach (GameObject prefab in segmentBakingInfos)
 			{
-				GameObject segmentGO = Instantiate(prefab, transform);
-				CentipedeSegment segment = segmentGO.GetComponent<CentipedeSegment>();
+				GameObject segmentGo = Instantiate(prefab, transform);
+				CentipedeSegment segment = segmentGo.GetComponent<CentipedeSegment>();
 				
 				if (segment is null)
 				{
@@ -37,15 +38,15 @@ namespace Characters.Centipede
 					return;
 				}
 				
-				float length = segment._Length;
+				float length = segment.Length;
 				
 				totalLength += length;
 				float lengthToCenterOfSegment = totalLength - (length * 0.5f);
 				
 				int delay = head.CalculateDelayForSegmentOnLength(lengthToCenterOfSegment);
-				segment._Delay = delay;
+				segment.Delay = delay;
 				segment.transform.position = initialPosition + Vector3.left * lengthToCenterOfSegment;
-				segment._Head = head;
+				segment.Head = head;
 				
 				head.AddSegment(segment);
 			}

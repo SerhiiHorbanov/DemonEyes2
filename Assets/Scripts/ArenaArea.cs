@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ArenaArea : MonoBehaviour
 {
-	[SerializeField] private float _Radius;
+	[FormerlySerializedAs("_Radius")] [SerializeField] private float _radius;
 
 	public float GetSignedDistanceTo(Vector2 position, out Vector2 relativeArenaPosition)
 	{
 		relativeArenaPosition = (Vector2)transform.position - position;
 		float distanceToCenter = relativeArenaPosition.magnitude;
-		return distanceToCenter - _Radius;
+		return distanceToCenter - _radius;
 	}
 	
 	public Vector2 GetRandomEdgePosition()
@@ -22,11 +23,11 @@ public class ArenaArea : MonoBehaviour
 		=> MapFromUnitCircleToWorld(Random.insideUnitCircle);
 	
 	public Vector2 MapFromUnitCircleToWorld(Vector2 input)
-		=> input * _Radius + (Vector2)transform.position;
+		=> input * _radius + (Vector2)transform.position;
 
 	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = Color.green;
-		Gizmos.DrawWireSphere(transform.position, _Radius);
+		Gizmos.DrawWireSphere(transform.position, _radius);
 	}
 }

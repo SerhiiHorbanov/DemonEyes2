@@ -1,6 +1,7 @@
 using Tools;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 namespace Characters.Player
 {
@@ -11,8 +12,8 @@ namespace Characters.Player
 		private PlayerProjectileFactory _projectileFactory;
 		private PlayerAim _aim;
 
-		[SerializeField] private IAudioGenerator _ShotAudioGenerator;
-		[SerializeField] private AudioSourcePool _ShotAudio;
+		[SerializeField] private IAudioGenerator _shotAudioGenerator;
+		[FormerlySerializedAs("_ShotAudio")] [SerializeField] private AudioSourcePool _shotAudio;
 
 		private void Awake()
 		{
@@ -26,7 +27,7 @@ namespace Characters.Player
 			_projectileFactory.SpawnProjectile(projectileZRotation);
 
 			
-			_ShotAudio.PlayEmptySource();
+			_shotAudio.PlayEmptySource();
 		}
 	}
 }

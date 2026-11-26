@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Squids
 {
@@ -6,9 +7,9 @@ namespace Characters.Squids
 	[RequireComponent(typeof(Rigidbody2D))]
 	public class SquidController : MonoBehaviour
 	{
-		[SerializeField] private Transform _Target;
+		[FormerlySerializedAs("_Target")] [SerializeField] private Transform _target;
 
-		[SerializeField] private ArenaArea _Arena;
+		[FormerlySerializedAs("_Arena")] [SerializeField] private ArenaArea _arena;
 		private Squid _squid;
 		private Rigidbody2D _rigidBody;
 
@@ -23,7 +24,7 @@ namespace Characters.Squids
 		{
 			public override void UpdateState(SquidController controller, Squid squid, Transform target)
 			{
-				Vector2 targetOfDirection = controller._Arena.GetRandomEdgePosition();
+				Vector2 targetOfDirection = controller._arena.GetRandomEdgePosition();
 				Vector2 relativePosition = targetOfDirection - (Vector2)squid.transform.position;
 				
 				float direction = Mathf.Atan2(relativePosition.y, relativePosition.x) * Mathf.Rad2Deg;
@@ -82,12 +83,12 @@ namespace Characters.Squids
 
 		private void FixedUpdate()
 		{
-			_currentState.UpdateState(this, _squid, _Target);
+			_currentState.UpdateState(this, _squid, _target);
 		}
 
 		private void SetDirectionToObjectAsTargetRotation()
 		{
-			Vector2 relativePosition = (Vector2)_Target.position - (Vector2)transform.position;	
+			Vector2 relativePosition = (Vector2)_target.position - (Vector2)transform.position;	
 			float targetRotation = Mathf.Atan2(relativePosition.y, relativePosition.x) * Mathf.Rad2Deg;
 			
 			_squid.TargetRotationDeg = targetRotation;

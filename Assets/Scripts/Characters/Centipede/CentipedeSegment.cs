@@ -1,17 +1,18 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Centipede
 {
 	public class CentipedeSegment : MonoBehaviour
 	{
-		public float _Length;
-		public int _Delay;
-		public CentipedeHead _Head;
+		[FormerlySerializedAs("_Length")] public float Length;
+		[FormerlySerializedAs("_Delay")] public int Delay;
+		[FormerlySerializedAs("_Head")] public CentipedeHead Head;
 
 		private void FixedUpdate()
 		{
-			CentipedeSegmentRecord record = _Head.GetRecordForDelay(_Delay);
+			CentipedeSegmentRecord record = Head.GetRecordForDelay(Delay);
 			ApplyRecord(record);
 		}
 

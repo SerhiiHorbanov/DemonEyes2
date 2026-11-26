@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Boids
 {
 	public class BoidFactory : MonoBehaviour
 	{
-		[SerializeField] private GameObject _BoidPrefab; 
-		[SerializeField] private Transform _Target;
-		[SerializeField] private ArenaArea _Arena;
+		[FormerlySerializedAs("_BoidPrefab")] [SerializeField] private GameObject _boidPrefab; 
+		[FormerlySerializedAs("_Target")] [SerializeField] private Transform _target;
+		[FormerlySerializedAs("_Arena")] [SerializeField] private ArenaArea _arena;
 
 		public Boid InstantiateAndInitializeBoid()
 		{
-			GameObject boidGO = Instantiate(_BoidPrefab, transform.position, Quaternion.identity);
-			Boid boid = boidGO.GetComponent<Boid>();
+			GameObject boidGo = Instantiate(_boidPrefab, transform.position, Quaternion.identity);
+			Boid boid = boidGo.GetComponent<Boid>();
 			
 			if (boid == null)
 			{
@@ -19,7 +20,7 @@ namespace Characters.Boids
 				return null;
 			}
 			
-			boid.Initialize(_Target, _Arena);
+			boid.Initialize(_target, _arena);
 			return boid;
 		}
 	}

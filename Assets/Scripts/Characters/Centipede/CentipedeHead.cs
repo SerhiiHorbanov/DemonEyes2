@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Centipede
 {
 	public class CentipedeHead : MonoBehaviour
 	{
 		private List<CentipedeSegmentRecord> _records = new();
-		[SerializeField] private List<CentipedeSegment> _Segments;
-		[SerializeField] private float _Speed;
-		[SerializeField] private int _ReservedRecordsCount;
+		[FormerlySerializedAs("_Segments")] [SerializeField] private List<CentipedeSegment> _segments;
+		[FormerlySerializedAs("_Speed")] [SerializeField] private float _speed;
+		[FormerlySerializedAs("_ReservedRecordsCount")] [SerializeField] private int _reservedRecordsCount;
 		private Vector2 _direction;
 		
 		private int _currentRecordIdx; 
-		public float _Length;
+		[FormerlySerializedAs("_Length")] public float Length;
 		
 		private void Awake()
 		{
@@ -22,12 +23,12 @@ namespace Characters.Centipede
 		
 		private void InitializeRecords()
 		{
-			float totalLength = _Length * 0.5f;
+			float totalLength = Length * 0.5f;
 			
-			foreach (CentipedeSegment segment in _Segments)
-				totalLength += segment._Length;
+			foreach (CentipedeSegment segment in _segments)
+				totalLength += segment.Length;
 			
-			int recordsCount = Mathf.RoundToInt(totalLength / _Speed / Time.fixedDeltaTime) + _ReservedRecordsCount;
+			int recordsCount = Mathf.RoundToInt(totalLength / _speed / Time.fixedDeltaTime) + _reservedRecordsCount;
 
 			_records.Capacity = recordsCount;
 			
@@ -48,7 +49,7 @@ namespace Characters.Centipede
 			CentipedeSegmentRecord record = new(transform.position, transform.rotation);
 			_records[_currentRecordIdx] = record;
 			
-			transform.position += (Vector3)(_direction * (_Speed * Time.fixedDeltaTime));
+			transform.position += (Vector3)(_direction * (_speed * Time.fixedDeltaTime));
 			
 			// Temporary walking in circles behavior. It's for debugging purposes
 			float angleOfDirectionRad = Mathf.Atan2(_direction.y, _direction.x);
@@ -64,22 +65,22 @@ namespace Characters.Centipede
 		}
 		
 		public int CalculateDelayForSegmentOnLength(float length)
-			=> Mathf.RoundToInt(length / _Speed / Time.fixedDeltaTime);
+			=> Mathf.RoundToInt(length / _speed / Time.fixedDeltaTime);
 
 		public void ReserveSegmentsMemory(int count)
-			=> _Segments.Capacity = count;
+			=> _segments.Capacity = count;
 
 		public void AddSegment(CentipedeSegment segment)
-			=> _Segments.Add(segment);
+			=> _segments.Add(segment);
 
 		public void ClearAndDestroySegments()
 		{
-			foreach (CentipedeSegment segment in _Segments)
+			foreach (CentipedeSegment segment in _segments)
 			{
 				if (segment != null)
 					DestroyImmediate(segment.gameObject);
 			}
-			_Segments.Clear();
+			_segments.Clear();
 		}
 	}
 }

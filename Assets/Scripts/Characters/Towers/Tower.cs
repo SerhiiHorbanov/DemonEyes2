@@ -1,5 +1,6 @@
 using Characters.Boids;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Towers
 {
@@ -8,7 +9,7 @@ namespace Characters.Towers
 	public class Tower : MonoBehaviour
 	{
 		private Vector2 _targetPosition;
-		public float _Speed;
+		[FormerlySerializedAs("_Speed")] public float Speed;
 		
 		private Rigidbody2D _rigidBody;
 		private BoidFactory _boidFactory;
@@ -29,7 +30,7 @@ namespace Characters.Towers
 			Vector2 deltaPosition = _targetPosition - (Vector2)transform.position;
 			Vector2 direction = deltaPosition.normalized;
 			
-			_rigidBody.linearVelocity = direction * _Speed;
+			_rigidBody.linearVelocity = direction * Speed;
 		}
 
 		public void MoveTowards(Vector2 target)

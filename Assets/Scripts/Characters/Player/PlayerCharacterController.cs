@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Characters.Player
 {
@@ -8,9 +9,9 @@ namespace Characters.Player
 	{
 		private PlayerInput _input;
 		
-		[SerializeField] private Camera _Camera;
-		[SerializeField] private PlayerCharacter _Character;
-		[SerializeField] private PlayerAim _Aim;
+		[FormerlySerializedAs("_Camera")] [SerializeField] private Camera _camera;
+		[FormerlySerializedAs("_Character")] [SerializeField] private PlayerCharacter _character;
+		[FormerlySerializedAs("_Aim")] [SerializeField] private PlayerAim _aim;
 		
 		private void Awake()
 		{
@@ -27,35 +28,35 @@ namespace Characters.Player
 		private void PointerAimPerformed(InputAction.CallbackContext obj)
 		{
 			Vector2 relativeAimPoint = obj.ReadValue<Vector2>();
-			Vector2 worldPositionOfPointer = _Camera.ScreenToWorldPoint(relativeAimPoint);
-			Vector2 pointerRelativeToCamera = worldPositionOfPointer - (Vector2)_Camera.transform.position;
-			_Aim.SetRelativeAimPoint(pointerRelativeToCamera);
+			Vector2 worldPositionOfPointer = _camera.ScreenToWorldPoint(relativeAimPoint);
+			Vector2 pointerRelativeToCamera = worldPositionOfPointer - (Vector2)_camera.transform.position;
+			_aim.SetRelativeAimPoint(pointerRelativeToCamera);
 		}
 
 		private void SecondaryAbilityCanceled(InputAction.CallbackContext obj)
 		{
-			_Character.DeactivateSecondaryAbility();
+			_character.DeactivateSecondaryAbility();
 		}
 
 		private void SecondaryAbilityPerformed(InputAction.CallbackContext obj)
 		{
-			_Character.ActivateSecondaryAbility();
+			_character.ActivateSecondaryAbility();
 		}
 
 		private void PrimaryAbilityCanceled(InputAction.CallbackContext obj)
 		{
-			_Character.DeactivatePrimaryAbility();
+			_character.DeactivatePrimaryAbility();
 		}
 
 		private void PrimaryAbilityPerformed(InputAction.CallbackContext obj)
 		{
-			_Character.ActivatePrimaryAbility();
+			_character.ActivatePrimaryAbility();
 		}
 
 		private void Move(InputAction.CallbackContext context)
 		{
 			Vector2 value = context.ReadValue<Vector2>();
-			_Character.SetMoveDirection(value);
+			_character.SetMoveDirection(value);
 		}
 	}
 }

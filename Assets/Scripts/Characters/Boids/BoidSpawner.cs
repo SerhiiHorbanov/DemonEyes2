@@ -1,12 +1,13 @@
 using Tools;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Boids
 {
 	[RequireComponent(typeof(BoidFactory))]
 	public class BoidSpawner : MonoBehaviour
 	{
-		[SerializeField] private float _DistanceFromCenter;
+		[FormerlySerializedAs("_DistanceFromCenter")] [SerializeField] private float _distanceFromCenter;
 		private BoidFactory _boidFactory;
 		
 		private void Awake()
@@ -23,7 +24,7 @@ namespace Characters.Boids
 			float angleRad = Random.Range(0f, Mathf.PI * 2f);
 			Vector2 position = new(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
 			
-			boidTransform.position = position * _DistanceFromCenter;
+			boidTransform.position = position * _distanceFromCenter;
 		}
 	}
 }

@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Player
 {
 	public class Crosshair : MonoBehaviour
 	{
-		[SerializeField] private PlayerAim _Aim;
+		[FormerlySerializedAs("_Aim")] [SerializeField] private PlayerAim _aim;
 
 		private void Awake()
 		{
-			_Aim.OnAimPositionUpdated += UpdatePositionFromUpdateAimPosition;
+			_aim.OnAimPositionUpdated += UpdatePositionFromUpdateAimPosition;
 		}
 
 		private void UpdatePositionFromUpdateAimPosition(Vector2 relativeAimPosition)

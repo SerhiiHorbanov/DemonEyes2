@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Player
 {
 	public abstract class AbilityWithCooldown : PlayerAbility
 	{
-		[SerializeField] private bool _IsAutomatic;
-		[SerializeField] private bool _CanBeBuffered;
-		[SerializeField] private float _Cooldown;
+		[FormerlySerializedAs("_IsAutomatic")] [SerializeField] private bool _isAutomatic;
+		[FormerlySerializedAs("_CanBeBuffered")] [SerializeField] private bool _canBeBuffered;
+		[FormerlySerializedAs("_Cooldown")] [SerializeField] private float _cooldown;
 		
-		private float _TimeOfLastUse = -1;
+		private float _timeOfLastUse = -1;
 
 		private bool _isActivated;
 		private bool _isBuffered;
@@ -16,21 +17,21 @@ namespace Characters.Player
 		private bool IsPastCooldown()
 		{
 			float now = Time.fixedTime;
-			float timeSinceLastUse = now - _TimeOfLastUse;
+			float timeSinceLastUse = now - _timeOfLastUse;
 
-			return _Cooldown < timeSinceLastUse;
+			return _cooldown < timeSinceLastUse;
 		}
 
 		public override void Activate()
 		{
 			_isActivated = true;
-			if (!_IsAutomatic)
+			if (!_isAutomatic)
 			{
 				if (_isActivated && IsPastCooldown())
 				{
 					ActivateAndUpdateLastTimeUsed();
 				}
-				else if (_CanBeBuffered)
+				else if (_canBeBuffered)
 				{
 					_isBuffered = true;
 				}
@@ -39,7 +40,7 @@ namespace Characters.Player
 
 		private void FixedUpdate()
 		{
-			if (_IsAutomatic && _isActivated && IsPastCooldown())
+			if (_isAutomatic && _isActivated && IsPastCooldown())
 			{
 				ActivateAndUpdateLastTimeUsed();
 				return;
@@ -59,7 +60,7 @@ namespace Characters.Player
 
 		private void ActivateAndUpdateLastTimeUsed()
 		{
-			_TimeOfLastUse = Time.fixedTime;
+			_timeOfLastUse = Time.fixedTime;
 			ActivateAfterCooldown();
 		}
 		

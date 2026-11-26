@@ -1,12 +1,13 @@
 using Characters.Player;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Alpha
 {
 	[RequireComponent(typeof(Rigidbody2D))]
 	public class AlphaMovement : PlayerMovement
 	{
-		[SerializeField] private float _Speed;
+		[FormerlySerializedAs("_Speed")] [SerializeField] private float _speed;
 		private Rigidbody2D _rigidBody;
 
 		private void Awake()
@@ -16,7 +17,7 @@ namespace Characters.Alpha
 		
 		private void FixedUpdate()
 		{
-			_rigidBody.linearVelocity = MoveDirection * _Speed;
+			_rigidBody.linearVelocity = MoveDirection * _speed;
 		}
 	}
 }

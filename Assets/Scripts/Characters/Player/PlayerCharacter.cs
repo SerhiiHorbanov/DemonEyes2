@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Player
 {
@@ -7,8 +8,8 @@ namespace Characters.Player
         private PlayerMovement _movement;
         private IDamageable _damageTakingBehaviour;
     
-        [SerializeField] private PlayerAbility _PrimaryAbility;
-        [SerializeField] private PlayerAbility _SecondaryAbility;
+        [FormerlySerializedAs("_PrimaryAbility")] [SerializeField] private PlayerAbility _primaryAbility;
+        [FormerlySerializedAs("_SecondaryAbility")] [SerializeField] private PlayerAbility _secondaryAbility;
     
         private void Awake()
         {
@@ -23,22 +24,22 @@ namespace Characters.Player
 
         public void ActivatePrimaryAbility()
         {
-            _PrimaryAbility?.Activate();
+            _primaryAbility?.Activate();
         }
         
         public void DeactivatePrimaryAbility()
         {
-            _PrimaryAbility?.Deactivate();
+            _primaryAbility?.Deactivate();
         }
 
         public void ActivateSecondaryAbility()
         {
-            _SecondaryAbility?.Activate();
+            _secondaryAbility?.Activate();
         }
 
         public void DeactivateSecondaryAbility()
         {
-            _SecondaryAbility?.Deactivate();
+            _secondaryAbility?.Deactivate();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Tools
 		public static void Invoke(T payload)
 			=> Event?.Invoke(payload);
 
-		public static void Invoke<U>() where U : T, new() 
-			=> Invoke(new U());
+		public static void Invoke<TU>() where TU : T, new() 
+			=> Invoke(new TU());
 	}
 }

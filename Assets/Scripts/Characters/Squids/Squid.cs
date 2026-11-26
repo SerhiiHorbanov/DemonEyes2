@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Squids
 {
@@ -8,11 +9,11 @@ namespace Characters.Squids
 	{
 		[NonSerialized] public float TargetRotationDeg;
 		
-		[SerializeField] private float _Speed;
-		[SerializeField] private float _RotationSpeed;
-		[SerializeField] private float _MinRotationSpeed;
+		[FormerlySerializedAs("_Speed")] [SerializeField] private float _speed;
+		[FormerlySerializedAs("_RotationSpeed")] [SerializeField] private float _rotationSpeed;
+		[FormerlySerializedAs("_MinRotationSpeed")] [SerializeField] private float _minRotationSpeed;
 		
-		[SerializeField] private float _BoostForce;
+		[FormerlySerializedAs("_BoostForce")] [SerializeField] private float _boostForce;
 
 		private Rigidbody2D _rigidBody;
 		public bool IsRotatedTowardsTarget 
@@ -34,7 +35,7 @@ namespace Characters.Squids
 		{
 			float difference = Mathf.DeltaAngle(transform.eulerAngles.z, TargetRotationDeg);
 
-			float rotationSpeed = Mathf.Max(_MinRotationSpeed, Mathf.Abs(_RotationSpeed * difference));
+			float rotationSpeed = Mathf.Max(_minRotationSpeed, Mathf.Abs(_rotationSpeed * difference));
 			float rotate = rotationSpeed * Mathf.Sign(difference) * deltaTime;
 			
 			transform.Rotate(0, 0, rotate);
@@ -42,7 +43,7 @@ namespace Characters.Squids
 
 		public void Boost()
 		{
-			_rigidBody.AddForce(transform.right * _BoostForce, ForceMode2D.Impulse);
+			_rigidBody.AddForce(transform.right * _boostForce, ForceMode2D.Impulse);
 		}
 	}
 }

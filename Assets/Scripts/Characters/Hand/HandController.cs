@@ -1,41 +1,42 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Characters.Hand
 {
 	public class HandController : MonoBehaviour
 	{
-		[SerializeField] private Transform _Target;
-		[SerializeField] private float _MinTargetDistanceToCenterForAggro;
+		[FormerlySerializedAs("_Target")] [SerializeField] private Transform _target;
+		[FormerlySerializedAs("_MinTargetDistanceToCenterForAggro")] [SerializeField] private float _minTargetDistanceToCenterForAggro;
 		
-		[SerializeField] private float _RestDistance;
-		[SerializeField] private Hand _Hand;
+		[FormerlySerializedAs("_RestDistance")] [SerializeField] private float _restDistance;
+		[FormerlySerializedAs("_Hand")] [SerializeField] private Hand _hand;
 		private bool _isTargetInTrigger;
 		
 		private void Update()
 		{
-			bool isTargetFarEnoughFromCenter = _Target.position.magnitude > _MinTargetDistanceToCenterForAggro;
+			bool isTargetFarEnoughFromCenter = _target.position.magnitude > _minTargetDistanceToCenterForAggro;
 			if (_isTargetInTrigger && isTargetFarEnoughFromCenter)
 			{
-				_Hand.MoveTo(_Target.position);
+				_hand.MoveTo(_target.position);
 			}
 			else
 			{
-				Vector2 restPosition = _Hand.transform.position.normalized * _RestDistance;
-				_Hand.MoveSlowlyTo(restPosition);
+				Vector2 restPosition = _hand.transform.position.normalized * _restDistance;
+				_hand.MoveSlowlyTo(restPosition);
 			}
 		}
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			bool isTarget = other.gameObject == _Target.gameObject;
+			bool isTarget = other.gameObject == _target.gameObject;
 			if (isTarget)
 				_isTargetInTrigger = true;
 		}
 		
 		private void OnTriggerExit2D(Collider2D other)
 		{
-			bool isTarget = other.gameObject == _Target.gameObject;
+			bool isTarget = other.gameObject == _target.gameObject;
 			if (isTarget)
 				_isTargetInTrigger = false;
 		}

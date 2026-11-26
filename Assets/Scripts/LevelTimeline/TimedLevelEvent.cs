@@ -1,14 +1,15 @@
 using System;
+using UnityEngine.Serialization;
 
 namespace LevelTimeline
 {
 	[Serializable]
 	public struct TimedLevelEvent : IComparable<TimedLevelEvent>
 	{
-		public float _TimeSeconds;
-		public LevelEvent _Event;
+		[FormerlySerializedAs("_TimeSeconds")] public float TimeSeconds;
+		[FormerlySerializedAs("_Event")] public LevelEvent Event;
 
 		public int CompareTo(TimedLevelEvent other)
-			=> _TimeSeconds.CompareTo(other._TimeSeconds);
+			=> TimeSeconds.CompareTo(other.TimeSeconds);
 	}
 }

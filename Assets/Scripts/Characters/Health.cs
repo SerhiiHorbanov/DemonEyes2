@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Characters
 {
 	public class Health : MonoBehaviour, IDamageable
 	{
-		public UnityEvent _OnDeath;
+		[FormerlySerializedAs("_OnDeath")] public UnityEvent OnDeath;
 
-		[SerializeField] private bool _GodMode;
-		[SerializeField] private int _Hp;
+		[FormerlySerializedAs("_GodMode")] [SerializeField] private bool _godMode;
+		[FormerlySerializedAs("_Hp")] [SerializeField] private int _hp;
 		private bool _isDead;
 		
 		public void DestroyThis()
@@ -16,15 +17,15 @@ namespace Characters
 		
 		public void TakeDamage(int damage)
 		{
-			if (_GodMode)
+			if (_godMode)
 				return;
 			
-			_Hp -= damage;
+			_hp -= damage;
 
-			if (_Hp > 0 || _isDead)
+			if (_hp > 0 || _isDead)
 				return;
 			
-			_OnDeath.Invoke();
+			OnDeath.Invoke();
 			_isDead = true;
 		}
 	}

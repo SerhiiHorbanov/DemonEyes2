@@ -1,14 +1,15 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Tools
 {
     public class AudioSourcePool : MonoBehaviour
     {
-        [SerializeField] public AudioSource[] _Sources;
+        [FormerlySerializedAs("_Sources")] [SerializeField] public AudioSource[] Sources;
 
         public bool PlayEmptySource()
         {
-            foreach (AudioSource source in _Sources)
+            foreach (AudioSource source in Sources)
             {
                 if (source.isPlaying)
                     continue;

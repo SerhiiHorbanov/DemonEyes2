@@ -1,35 +1,36 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Characters
 {
 	public class DamageInflicter : MonoBehaviour
 	{
-		public UnityEvent<IDamageable> _OnInflictedDamage;
-		public UnityEvent _OnCollidedWithoutInflictingDamage;
+		[FormerlySerializedAs("_OnInflictedDamage")] public UnityEvent<IDamageable> OnInflictedDamage;
+		[FormerlySerializedAs("_OnCollidedWithoutInflictingDamage")] public UnityEvent OnCollidedWithoutInflictingDamage;
 		
-		public GameObject[] _Ignored;
-		[SerializeField] private int _Damage;
+		[FormerlySerializedAs("_Ignored")] public GameObject[] Ignored;
+		[FormerlySerializedAs("_Damage")] [SerializeField] private int _damage;
 
 		private void OnTriggerEnter2D(Collider2D other)
 		{
-			GameObject otherGO = other.gameObject;
+			GameObject otherGo = other.gameObject;
 			
-			foreach (GameObject ignored in _Ignored)
+			foreach (GameObject ignored in Ignored)
 			{
-				if (otherGO == ignored)
+				if (otherGo == ignored)
 					return;
 			}
 
-			IDamageable damageable = otherGO.GetComponent<IDamageable>();
+			IDamageable damageable = otherGo.GetComponent<IDamageable>();
 			if (damageable is null)
 			{
-				_OnCollidedWithoutInflictingDamage.Invoke();
+				OnCollidedWithoutInflictingDamage.Invoke();
 				return;
 			}
 			
-			damageable.TakeDamage(_Damage);
-			_OnInflictedDamage.Invoke(damageable);
+			damageable.TakeDamage(_damage);
+			OnInflictedDamage.Invoke(damageable);
 		}
 	}
 }

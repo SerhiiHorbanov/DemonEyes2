@@ -1,34 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace LevelTimeline
 {
 	public class LevelTimelineRunner : MonoBehaviour
 	{
-		[SerializeField] private LevelTimeline _Timeline;
-		[SerializeField] private float _TimeScale = 1;
-		[SerializeField] private bool _IsPaused;
-		[SerializeField] private bool _LogEventExecutions;
+		[FormerlySerializedAs("_Timeline")] [SerializeField] private LevelTimeline _timeline;
+		[FormerlySerializedAs("_TimeScale")] [SerializeField] private float _timeScale = 1;
+		[FormerlySerializedAs("_IsPaused")] [SerializeField] private bool _isPaused;
+		[FormerlySerializedAs("_LogEventExecutions")] [SerializeField] private bool _logEventExecutions;
 
 		private float _time;
 		private int _nextEventToExpire;
 		
 		private void Start()
 		{
-			_Timeline.EnsureOrdered();
+			_timeline.EnsureOrdered();
 		}
 		
 		private void FixedUpdate()
 		{
-			_time += Time.fixedDeltaTime * _TimeScale;
+			_time += Time.fixedDeltaTime * _timeScale;
 			ExecuteExpiredEvents();
 		}
 
 		private void ExecuteExpiredEvents()
 		{
-			List<TimedLevelEvent> events = _Timeline._Events;
+			List<TimedLevelEvent> events = _timeline.Events;
 		
-			for (int i = _nextEventToExpire; events[i]._TimeSeconds < _time && i < events.Count; i++)
+			for (int i = _nextEventToExpire; events[i].TimeSeconds < _time && i < events.Count; i++)
 			{
 				ExecuteEvent(i);
 				_nextEventToExpire = i + 1;
@@ -37,7 +38,7 @@ namespace LevelTimeline
 	
 		private void ExecuteEvent(int idx)
 		{
-			LevelEvent @event = _Timeline._Events[idx]._Event;
+			LevelEvent @event = _timeline.Events[idx].Event;
 
 			if (@event == null)
 			{
@@ -45,7 +46,7 @@ namespace LevelTimeline
 				return;
 			}
 			
-			if (_LogEventExecutions)
+			if (_logEventExecutions)
 				Debug.Log($"Executing timeline event of type {@event.GetType()} with index {idx}. At time: {_time}");
 
 			@event.Execute();
