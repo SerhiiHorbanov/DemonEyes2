@@ -1,3 +1,5 @@
+using System;
+using Characters.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,6 +10,14 @@ namespace Characters.Boids
 		[FormerlySerializedAs("_BoidPrefab")] [SerializeField] private GameObject _boidPrefab; 
 		[FormerlySerializedAs("_Target")] [SerializeField] private Transform _target;
 		[FormerlySerializedAs("_Arena")] [SerializeField] private ArenaArea _arena;
+
+		private void Start()
+		{
+			if (_target == null)
+				_target = PlayerSingleton.Instance.transform;
+			if (_arena == null)
+				_arena = ArenaArea.Instance;
+		}
 
 		public Boid InstantiateAndInitializeBoid()
 		{
