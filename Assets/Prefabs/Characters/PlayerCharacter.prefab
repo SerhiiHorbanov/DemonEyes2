@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f335935b3d143bb8883b9d305dae249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.Player.Crosshair
-  _Aim: {fileID: 4841013755917393898}
+  _aim: {fileID: 4841013755917393898}
 --- !u!1 &4603628170529486091
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 2488477756513200686}
   - component: {fileID: 4841013755917393898}
   - component: {fileID: 4341842836130998412}
+  - component: {fileID: 1510512547911369031}
   m_Layer: 3
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -248,8 +249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706cc9e63b8ba924d9c2f89c09821020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.Player.PlayerCharacter
-  _PrimaryAbility: {fileID: 0}
-  _SecondaryAbility: {fileID: 0}
+  _primaryAbility: {fileID: 0}
+  _secondaryAbility: {fileID: 0}
 --- !u!58 &4423831962216892668
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -298,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef0e278604724df689a22495dc2155d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Characters.Health
-  _OnDeath:
+  OnDeath:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 65923945129757237}
@@ -313,8 +314,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _GodMode: 0
-  _Hp: 1
+  _godMode: 0
+  _hp: 1
 --- !u!50 &302015848575744119
 Rigidbody2D:
   serializedVersion: 5
@@ -384,3 +385,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1510512547911369031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6011140040128277087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38a01ec7ffd84e15918a9f52f520d8c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Characters.Player.PlayerSingleton
